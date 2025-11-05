@@ -1,15 +1,20 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-html, body { height: 100%; }
-body { background: #f7fafc; color: #0f172a; }
-.container { max-width: 1200px; margin: 0 auto; padding: 0 16px; }
-.card { @apply rounded-2xl border bg-white shadow-sm; }
-.btn { @apply rounded-2xl px-4 py-2 font-medium; }
-.btn-primary { @apply bg-brand-900 text-white hover:opacity-90; }
-.btn-ghost { @apply border hover:bg-neutral-50; }
-.kpi { @apply rounded-2xl border bg-white p-5; }
-.kpi .label { @apply text-xs uppercase tracking-wide text-neutral-500; }
-.kpi .value { @apply mt-2 text-2xl font-semibold; }
+:root {
+  --bg: #0b0f19;
+  --fg: #ffffff;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
