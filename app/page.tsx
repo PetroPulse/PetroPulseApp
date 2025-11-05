@@ -1,34 +1,56 @@
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+
 export default function Home() {
-  const card = "rounded-2xl border border-gray-200 bg-white p-6 shadow-sm transition hover:shadow-md";
-  const title = "text-base font-semibold tracking-tight";
-  const desc = "mt-1 text-sm text-gray-600";
   return (
-    <section className="space-y-8">
-      <div className="flex items-end justify-between">
-        <div>
-          <h1 className="text-2xl font-bold tracking-tight">Welcome to PetroPulse</h1>
-          <p className="mt-1 text-gray-600">Run your oil jobber operations with clarity and speed.</p>
+    <section className="space-y-10">
+      <div className="grid items-center gap-6 md:grid-cols-2">
+        <div className="space-y-4">
+          <h1 className="text-4xl font-bold tracking-tight">Run your oil jobber operations with clarity.</h1>
+          <p className="text-lg text-muted-foreground">
+            PetroPulse centralizes invoices, receivables, and deliveries into a single source of truth.
+          </p>
+          <div className="flex gap-3">
+            <Button asChild><Link href="/connections">Connect your data</Link></Button>
+            <Button variant="outline" asChild><Link href="/dashboard">View dashboard</Link></Button>
+          </div>
         </div>
+        <Card className="border-dashed">
+          <CardContent className="p-6">
+            <div className="grid grid-cols-2 gap-3 text-sm">
+              <Metric label="Invoices" value="12,481" />
+              <Metric label="30-day AR" value="$842k" />
+              <Metric label="On-time deliveries" value="97.2%" />
+              <Metric label="Avg. margin" value="14.6%" />
+            </div>
+          </CardContent>
+        </Card>
       </div>
 
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        <a className={card} href="/dashboard">
-          <div className={title}>Dashboard</div>
-          <p className={desc}>KPIs, receivables, deliveries at a glance.</p>
-        </a>
-        <a className={card} href="/orders">
-          <div className={title}>Orders</div>
-          <p className={desc}>Create and track dealer orders.</p>
-        </a>
-        <a className={card} href="/settings/targets">
-          <div className={title}>Targets</div>
-          <p className={desc}>AR grace days & margin goals.</p>
-        </a>
-        <a className={card} href="/login">
-          <div className={title}>Login</div>
-          <p className={desc}>Authenticate with Supabase.</p>
-        </a>
+        <QuickLink href="/connections" title="Connections" desc="Excel, Google Sheets, QBO, ERP uploads." />
+        <QuickLink href="/orders" title="Orders" desc="Create & track dealer orders." />
+        <QuickLink href="/settings/targets" title="Targets" desc="AR grace days, margin goals." />
       </div>
     </section>
+  );
+}
+
+function Metric({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="rounded-xl border p-4">
+      <div className="text-xs text-muted-foreground">{label}</div>
+      <div className="mt-1 text-xl font-semibold">{value}</div>
+    </div>
+  );
+}
+
+function QuickLink({ href, title, desc }: { href: string; title: string; desc: string }) {
+  return (
+    <a href={href} className="rounded-2xl border bg-card p-6 shadow-sm transition hover:shadow-md">
+      <div className="text-base font-semibold tracking-tight">{title}</div>
+      <p className="mt-1 text-sm text-muted-foreground">{desc}</p>
+    </a>
   );
 }
